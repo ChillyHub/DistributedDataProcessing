@@ -3,9 +3,7 @@ package car;
 import java.awt.*;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.Time;
 import java.util.Random;
-import java.util.Timer;
 
 public class Main {
     public static void main(String[] args) throws Exception {
