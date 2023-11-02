@@ -1,0 +1,12 @@
+DOWN=car.command.DownCommand
+UP=car.command.UpCommand
+LEFT=car.command.LeftCommand
+RIGHT=car.command.RightCommand
+UP_LEFT=car.command.UpLeftCommand
+UP_RIGHT=car.command.UpRightCommand
+DOWN_LEFT=car.command.DownLeftCommand
+DOWN_RIGHT=car.command.DownRightCommand
+SPEED=car.command.SpeedCommand
+CHANGE_COLOR=car.command.ColorCommand
+NAME=car.command.NameCommand
+BLINK=car.command.BlinkCommand
