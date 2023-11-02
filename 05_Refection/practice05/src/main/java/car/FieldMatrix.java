@@ -70,18 +70,29 @@ public class FieldMatrix {
             return false;
         }
 
-        CellState cellState = cells[torow][tocol];
-        synchronized (cellState){
-            if (cellState == CellState.EMPTY){
-                cells[fromrow][fromcol] = CellState.EMPTY;
-                cells[torow][tocol] = CellState.CAR;
-                return true;
-            }else{
-                return false;
+        if (Math.abs(torow - fromrow) > 0 && Math.abs(tocol - fromcol) > 0) {
+            synchronized (cells) {
+                if (cells[torow][tocol] == CellState.EMPTY &&
+                        cells[fromrow][tocol] == CellState.EMPTY &&
+                        cells[torow][fromcol] == CellState.EMPTY) {
+                    cells[fromrow][fromcol] = CellState.EMPTY;
+                    cells[torow][tocol] = CellState.CAR;
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            CellState cellState = cells[torow][tocol];
+            synchronized (cellState) {
+                if (cellState == CellState.EMPTY){
+                    cells[fromrow][fromcol] = CellState.EMPTY;
+                    cells[torow][tocol] = CellState.CAR;
+                    return true;
+                }else{
+                    return false;
+                }
             }
         }
-
     }
-
-
 }

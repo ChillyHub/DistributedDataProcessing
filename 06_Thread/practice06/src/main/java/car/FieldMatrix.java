@@ -1,6 +1,6 @@
 package car;
 
-import java.io.*;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class FieldMatrix {
@@ -41,10 +41,10 @@ public class FieldMatrix {
                                 fm.cells[i][j] = CellState.WALL;
                         }
                     }
-                }catch(StringIndexOutOfBoundsException e){}
+                } catch(StringIndexOutOfBoundsException ignored){}
             }
             return fm;
-        }catch(Exception e){
+        } catch(Exception e){
             e.printStackTrace();
             return null;
         }
@@ -92,6 +92,25 @@ public class FieldMatrix {
                 }else{
                     return false;
                 }
+            }
+        }
+    }
+
+    public boolean modifyWall(int row, int col) {
+        if (row < 0 || row >= rows || col < 0 || col >= cols) {
+            return false;
+        }
+
+        CellState cellState = cells[row][col];
+        synchronized (cellState) {
+            if (cellState == CellState.WALL) {
+                cells[row][col] = CellState.EMPTY;
+                return true;
+            } else if (cellState == CellState.EMPTY) {
+                cells[row][col] = CellState.WALL;
+                return true;
+            } else {
+                return false;
             }
         }
     }

@@ -9,9 +9,6 @@ import java.io.InputStreamReader;
 import java.util.Random;
 
 
-/**
- * @author : Alex
- **/
 public class Main {
     public static void main(String[] args) throws Exception{
         InputStream is = CarPainter.class.getClassLoader().getResourceAsStream("field.txt");
