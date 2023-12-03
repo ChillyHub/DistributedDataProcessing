@@ -1,12 +1,10 @@
 package client;
 
-import car.webservice.Color;
 import car.webservice.Direction;
 import car.webservice.Server;
 import car.webservice.ServerService;
 
 import javax.xml.ws.WebServiceException;
-import java.awt.*;
 import java.net.URL;
 import java.util.Random;
 

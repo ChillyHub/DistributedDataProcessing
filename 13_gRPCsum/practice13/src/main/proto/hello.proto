@@ -1,0 +1,36 @@
+syntax = "proto3";
+package grpc;
+
+option java_multiple_files = true;
+option java_package = "grpc.hello";
+option java_outer_classname = "EchoServiceProto";
+
+
+message EchoRequest {
+    string message = 1;
+}
+
+message EchoResponse {
+    string message = 1;
+}
+
+message SummRequest {
+    string clientId = 1;
+    int32 num1 = 2;
+    int32 num2 = 3;
+}
+
+message SummArrayRequest {
+    string clientId = 1;
+    repeated int32 nums = 2;
+}
+
+message SummResponse {
+    int32 result = 1;
+}
+
+service EchoService {
+    rpc echo(EchoRequest) returns (EchoResponse) {}
+    rpc summ(SummRequest) returns (SummResponse) {}
+    rpc summArray(SummArrayRequest) returns (SummResponse) {}
+}

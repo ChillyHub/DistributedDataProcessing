@@ -1,0 +1,75 @@
+package car;
+
+import java.awt.*;
+import java.time.LocalDateTime;
+import java.util.Random;
+
+public class Car {
+    private final CarServer carServer;
+
+    private Position position;
+    private static int count = 1;
+    private int index;
+    private int speed = 500;
+    private Color color;
+    private String name;
+    private LocalDateTime lastOperation;
+
+    private CarServer.Direction direction;
+
+    public Car(CarServer carServer, Position position){
+        this.carServer = carServer;
+        this.position = position;
+        speed = new Random().nextInt(300) + 300;
+        index = count++;
+        color = new Color((int)(Math.random() * 0x1000000));
+        lastOperation = LocalDateTime.now();
+    }
+
+    public void setColor(Color color){
+        this.color = color;
+    }
+
+    public Color getColor(){return color;}
+    public String getName(){return name;}
+    public void setName(String name){this.name = name;}
+    public LocalDateTime getLastOperation(){return lastOperation;}
+    public void destroy(){
+        carServer.destroyCar(this);
+    }
+
+    public boolean moveTo(CarServer.Direction direction){
+        try {
+            Thread.sleep(speed);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            if (this.direction != direction) {
+                this.direction = direction;
+                carServer.carParameterChanged(this);
+            }
+            lastOperation = LocalDateTime.now();
+            if (carServer.moveCarTo(this, direction)) {
+                position = position.move(direction);
+                return true;
+            } else
+                return false;
+        }catch(ArrayIndexOutOfBoundsException e){
+            return false;
+        }
+
+    }
+    public Position getPosition(){return position;}
+
+    public int getIndex(){return index;}
+
+    public CarServer.Direction getDirection() {
+        return direction;
+    }
+
+    @Override
+    public String toString(){
+        return "Car: index="+index;
+    }
+}

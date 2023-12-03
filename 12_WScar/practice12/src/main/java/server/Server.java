@@ -63,5 +63,7 @@ public class Server {
 
         Server server = new Server(fm,p);
         Endpoint.publish(url, server);
+
+
     }
 }
